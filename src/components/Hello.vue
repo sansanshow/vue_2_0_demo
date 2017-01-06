@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ msg | capitalize }}</h1>
+    computed text:{{ reversedText }}
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
@@ -20,6 +21,7 @@
     <span v-bind:title="message">
       Hover your mouse over me for a few seconds to see my dynamically bound title!ssss
     </span>
+
   </div>
 </template>
 
@@ -28,8 +30,20 @@
     name: 'hello',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App',
+        msg: 'welcome to Your Vue.js App',
         message: 'You loaded this page on ' + new Date()
+      }
+    },
+    computed: {
+      reversedText: function () {
+        return this.msg.split('').reverse().join('')
+      }
+    },
+    filters: {
+      capitalize: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
       }
     }
   }
